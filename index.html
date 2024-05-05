@@ -9,9 +9,11 @@
 <title>Books Library</title>
 </head>
 <body>
-    <button type="button" class="open-button">NEW BOOK</button>
+    <div class="header">
+        <button type="button" class="open-button">NEW BOOK</button>
+    </div>
     
-        <!-- The form -->
+        <!-- The pop-up form:use absolute positioning -->
     <div class="form-popup" id="myForm">
     <form action="" class="form-container">
         <h1>New Book</h1>
@@ -31,22 +33,8 @@
     </div>
     
 
-    <table>
-        <caption>Table of books</caption>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Page</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th></th>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="display_panel">
+               <!-- added books will be displayed here -->
+    </div>
 </body>
 </html>
