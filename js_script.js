@@ -45,6 +45,7 @@ function add_book_to_lib(){
 
         // Reset the form inputs
         document.querySelector('.form-container').reset();
+
     })
 }
 
@@ -75,4 +76,3 @@ function displayBooks(){
 
 pop_up_form();
 add_book_to_lib();
-displayBooks();
