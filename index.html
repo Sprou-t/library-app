@@ -5,12 +5,31 @@
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <link href='stylesheet/style.css' rel='stylesheet'>
 <link href='stylesheet/reset.css' rel='stylesheet'>
-<title>Document</title>
+<script src="js_script.js" defer></script>
+<title>Books Library</title>
 </head>
 <body>
-    <form>
-        <button type="button">NEW BOOK</button>
+    <button type="button" class="open-button">NEW BOOK</button>
+    
+        <!-- The form -->
+    <div class="form-popup" id="myForm">
+    <form action="" class="form-container">
+        <h1>New Book</h1>
+
+        <label for="title"><b>Title</b></label>
+        <input id='title' type="text" placeholder="Enter Title" name="title" required>
+
+        <label for="author"><b>Author</b></label>
+        <input id='author' type="text" placeholder="Enter Author name" name="author" required>
+
+        <label for="page"><b>Page number</b></label>
+        <input id='page' type="number" placeholder="Enter page number" name="page" required>
+
+        <button type="submit" class="submit btn">Enter</button>
+        <button type="button" class="cancel btn">Close</button>
     </form>
+    </div>
+    
 
     <table>
         <caption>Table of books</caption>
