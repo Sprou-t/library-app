@@ -1,6 +1,12 @@
 //create a library array to store all my book objs
 let booklist=[];
 
+//global element reference
+const open_btn = document.querySelector('.open-button');
+const enterButton = document.querySelector('.submit');
+let display_panel = document.querySelector('.display_panel');
+let cancel=document.querySelector('.cancel');
+
 //obj constructor
 function Book(title,author,page){
     this.title = title;
@@ -15,8 +21,7 @@ Book.prototype.info = function() {
 
 //create button-onclick event that pops up a form 
 function pop_up_form(){
-    const btn = document.querySelector('.open-button');
-    btn.addEventListener('click', ()=>{
+    open_btn.addEventListener('click', ()=>{
         document.querySelector('#myForm').style.display = 'block';
     })
 }
@@ -25,7 +30,6 @@ function pop_up_form(){
 function add_book_to_lib(){
     //prompt user about the book info using forms in html
     //take input, create obj and put obj into array
-    const enterButton = document.querySelector('.submit');
     enterButton.addEventListener('click',(e)=>{
         e.preventDefault(); //prevent form from reloading aft submitting when i press the button as my books data will be lost
         let input1=document.querySelector('#title');
@@ -40,39 +44,77 @@ function add_book_to_lib(){
         //Add the object to the array
         booklist.push(newBook);
 
-        // // Display the books on the webpage
-         displayBooks();
-
+        displayBooks();
         // Reset the form inputs
         document.querySelector('.form-container').reset();
-
+        
     })
 }
 
 //loop thru the array to display all the books on the webpage
-function displayBooks(){
-    let display_panel = document.querySelector('.display_panel');
-    display_panel.innerHTML = ''; // Clear previous content
-    //loop w .foreach()
-    booklist.forEach(book=>{
-        //add html content in .display_panel div
-            //create each div for each book
-        let bookdiv = document.createElement('div');
+function displayBooks() {
+  // clear the content in display_panel to avoid duplication 
+  display_panel.textContent = '';//when textContent set, all child nodes r removed & replaced by new text node
 
-            //create each para of each bk & append them to the div
-        let titlepara = document.createElement('p');
-        titlepara.textContent = `Title: ${book['title']}`;
-        bookdiv.appendChild(titlepara);
-        let authorpara = document.createElement('p');
-        authorpara.textContent = `Author: ${book.author}`;
-        bookdiv.appendChild(authorpara);
-        let pagepara = document.createElement('p');
-        pagepara.textContent = `Page number: ${book.page}`;
-        bookdiv.appendChild(pagepara);
-        //append bookdiv to display_panel
-        display_panel.appendChild(bookdiv);
+  // Loop through the booklist array
+  booklist.forEach(book => {
+    // Create a new div element for each book
+    let bookdiv = document.createElement('div');
+    
+    // Create paragraphs for each book detail
+    let titlepara = document.createElement('p');
+    titlepara.textContent = `Title: ${book.title}`;
+    bookdiv.appendChild(titlepara);
+
+    let authorpara = document.createElement('p');
+    authorpara.textContent = `Author: ${book.author}`;
+    bookdiv.appendChild(authorpara);
+
+    let pagepara = document.createElement('p');
+    pagepara.textContent = `Page number: ${book.page}`;
+    bookdiv.appendChild(pagepara);
+
+    let statusButton = document.createElement('button');
+    statusButton.classList.add('status');
+    statusButton.textContent=`Not read`;
+    bookdiv.appendChild(statusButton);
+
+    let cancelButton = document.createElement('button');
+    cancelButton.classList.add('cancel');
+    cancelButton.textContent=`Cancel`;
+    bookdiv.appendChild(cancelButton);
+
+    // Append the book details div to the display panel
+    display_panel.appendChild(bookdiv);
+  });
+}
+
+function removeBookFromDisplay(){
+    // Use event delegation by adding an event listener to the display panel
+    display_panel.addEventListener('click', (e) => {
+        // Check if the clicked element is a cancel button
+        if (e.target.classList.contains('cancel')) {
+            // Traverse up the DOM tree to find the parent book div
+            let bookCard = e.target.parentNode; //find parent of cancel button
+            console.log(bookCard)
+            bookCard.textContent='';
+
+            //find the index of the canceled book in the array by comparing the child element of div with the properties of bk obj
+            let index = booklist.findIndex(book => 
+                book.title === bookCard.querySelector('p.title').textContent &&
+                book.author === bookCard.querySelector('p.author').textContent &&
+                book.page === parseInt(bookCard.querySelector('p.page').textContent)
+            );
+            // array.splice(indexToRemove, qty of item to remove)
+            booklist.splice(index, 1);
+        }
     })
+}
+
+function changeReadStatus(){
+
 }
 
 pop_up_form();
 add_book_to_lib();
+removeBookFromDisplay();
