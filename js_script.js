@@ -29,15 +29,18 @@ function add_book_to_lib(){
     //take input, create obj and put obj into array
     enterButton.addEventListener('click',(e)=>{
         e.preventDefault(); //prevent form from reloading aft submitting when i press the button as my books data will be lost
-        let input1=document.querySelector('#title');
-        let input2=document.querySelector('#author');
-        let input3=document.querySelector('#page');
+        let input1=document.querySelector('#id');
+        let input2=document.querySelector('#title');
+        let input3=document.querySelector('#author');
+        let input4=document.querySelector('#page');
         //get all the values
         const value1 = input1.value;
         const value2 = input2.value;
         const value3 = input3.value;
+        const value4 = input4.value;
         //use the values to create the obj
-        let newBook = new Book(value1,value2,value3);
+        let newBook = new Book(value1,value2,value3,value4);
+        console.log(newBook);
         //Add the object to the array
         booklist.push(newBook);
 
@@ -66,17 +69,17 @@ function displayBooks() {
 
     let titlepara = document.createElement('p');
     titlepara.classList.add('title');
-    titlepara.textContent = `${book.title}`;
+    titlepara.textContent = `Title:${book.title}`;
     bookdiv.appendChild(titlepara);
 
     let authorpara = document.createElement('p');
     authorpara.classList.add('author');
-    authorpara.textContent = `${book.author}`;
+    authorpara.textContent = `Author:${book.author}`;
     bookdiv.appendChild(authorpara);
 
     let pagepara = document.createElement('p');
     pagepara.classList.add('page');
-    pagepara.textContent = `${book.page}`;
+    pagepara.textContent = `Page Number:${book.page}`;
     bookdiv.appendChild(pagepara);
 
     let statusButton = document.createElement('button');
@@ -101,14 +104,20 @@ function displayBooks() {
         if (e.target.classList.contains('cancel')) {
             // Traverse up the DOM tree to find the parent book div
             let bookCard = e.target.parentNode; //find parent of cancel button
-            bookCard.textContent='';
-
             //find the index of the canceled book in the array by comparing the child element of div with the properties of bk obj
-            let index = booklist.findIndex(book => {return book.id ===bookCard.querySelector('.id') }
-            );
-            // array.splice(indexToRemove, qty of item to remove)
-            booklist.splice(index, 1);
-            displayBooks();//need to display again why????
+            let idElement = bookCard.querySelector('.id').textContent;
+            // Iterate over the booklist array to find the matching book
+            for (let i = 0; i < booklist.length; i++) {
+                // Check if the id of the current book matches the id from the clicked element
+                if (booklist[i].id === idElement) {
+                    // Remove the matching book from the array
+                    booklist.splice(i, 1);
+                    break; // Exit the loop since we found and removed the book
+                }
+            }
+            
+            bookCard.textContent='';
+            displayBooks();
         }
     }
 )
@@ -121,4 +130,3 @@ function changeReadStatus(){
 
 pop_up_form();
 add_book_to_lib();
-removeBookFromDisplay();
