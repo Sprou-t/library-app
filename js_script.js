@@ -8,16 +8,13 @@ let display_panel = document.querySelector('.display_panel');
 let cancel=document.querySelector('.cancel');
 
 //obj constructor
-function Book(title,author,page){
+function Book(id,title,author,page){
+    this.id = id;
     this.title = title;
     this.author = author;
     this.page = page;
 }
 
-//hv no use for this now
-Book.prototype.info = function() {
-    return `This book is ${this.title} by ${this.author}. Page: ${this.page}`;
-};
 
 //create button-onclick event that pops up a form 
 function pop_up_form(){
@@ -62,16 +59,24 @@ function displayBooks() {
     let bookdiv = document.createElement('div');
     
     // Create paragraphs for each book detail
+    let idpara = document.createElement('p');
+    idpara.classList.add('id');
+    idpara.textContent = `${book.id}`;
+    bookdiv.appendChild(idpara);
+
     let titlepara = document.createElement('p');
-    titlepara.textContent = `Title: ${book.title}`;
+    titlepara.classList.add('title');
+    titlepara.textContent = `${book.title}`;
     bookdiv.appendChild(titlepara);
 
     let authorpara = document.createElement('p');
-    authorpara.textContent = `Author: ${book.author}`;
+    authorpara.classList.add('author');
+    authorpara.textContent = `${book.author}`;
     bookdiv.appendChild(authorpara);
 
     let pagepara = document.createElement('p');
-    pagepara.textContent = `Page number: ${book.page}`;
+    pagepara.classList.add('page');
+    pagepara.textContent = `${book.page}`;
     bookdiv.appendChild(pagepara);
 
     let statusButton = document.createElement('button');
@@ -89,27 +94,26 @@ function displayBooks() {
   });
 }
 
-function removeBookFromDisplay(){
+
     // Use event delegation by adding an event listener to the display panel
-    display_panel.addEventListener('click', (e) => {
+    display_panel.addEventListener('click',(e)=>{
         // Check if the clicked element is a cancel button
         if (e.target.classList.contains('cancel')) {
             // Traverse up the DOM tree to find the parent book div
             let bookCard = e.target.parentNode; //find parent of cancel button
-            console.log(bookCard)
             bookCard.textContent='';
 
             //find the index of the canceled book in the array by comparing the child element of div with the properties of bk obj
-            let index = booklist.findIndex(book => 
-                book.title === bookCard.querySelector('p.title').textContent &&
-                book.author === bookCard.querySelector('p.author').textContent &&
-                book.page === parseInt(bookCard.querySelector('p.page').textContent)
+            let index = booklist.findIndex(book => {return book.id ===bookCard.querySelector('.id') }
             );
             // array.splice(indexToRemove, qty of item to remove)
             booklist.splice(index, 1);
+            displayBooks();//need to display again why????
         }
-    })
-}
+    }
+)
+
+
 
 function changeReadStatus(){
 
