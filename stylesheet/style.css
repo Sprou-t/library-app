@@ -1,5 +1,5 @@
 /* The popup form - hidden by default */
-.form-popup {
+.form-container {
     display: none;
     position:absolute;
     bottom: 400px;
@@ -11,4 +11,8 @@
   .display_panel{
     display: flex;
     gap: 20px;
+  }
+
+  #blur {
+    filter: blur(4px);
   }
