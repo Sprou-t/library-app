@@ -19,7 +19,7 @@
         <h1>New Book</h1>
 
         <label for="id"><b>ID</b></label>
-        <input id='id' type="text" placeholder="Enter ID" name="id" required>
+        <input id='id' type="number" placeholder="Enter ID" name="id" required>
 
         <label for="title"><b>Title</b></label>
         <input id='title' type="text" placeholder="Enter Title" name="title" required>
@@ -29,6 +29,9 @@
 
         <label for="page"><b>Page number</b></label>
         <input id='page' type="number" placeholder="Enter page number" name="page" required>
+
+        <label id='status_label' for="status"><b>Already read?</b></label>
+        <input id='status' type="checkbox" name="status">
 
         <!-- add a toggle button to change the read status of a book -->
         <button type="submit" class="submit btn">Enter</button>

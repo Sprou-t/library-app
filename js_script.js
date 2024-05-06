@@ -3,16 +3,20 @@ let booklist=[];
 
 //global element reference
 const open_btn = document.querySelector('.open-button');
+const form = document.querySelector('.form-container')
 const enterButton = document.querySelector('.submit');
 let display_panel = document.querySelector('.display_panel');
+let status_label = document.querySelector('#status_label');
 let cancel=document.querySelector('.cancel');
+let readStatus = document.querySelector('#status');
 
 //obj constructor
-function Book(id,title,author,page){
-    this.id = id;
+function Book(id,title,author,page,status){ //obj created: Book(id = x, title = y, author = z, page = m). We can access the key to the value pair
+    this.id = id; //key = value pair
     this.title = title;
     this.author = author;
     this.page = page;
+    this.status = status;
 }
 
 
@@ -22,6 +26,22 @@ function pop_up_form(){
         document.querySelector('#myForm').style.display = 'block';
     })
 }
+
+//When click on the checkbox, generate an additional status of read and pages for pop up
+     //displays the info in display
+     readStatus.addEventListener('click',()=>{
+        //add info after clicking
+        let statusDiv = document.createElement('span');
+        statusDiv.textContent='Pages read:';
+        
+        let pageInput = document.createElement('input');
+        pageInput.placeholder = 'Number of pages read'
+
+        
+        form.insertBefore(statusDiv,status_label);
+        form.insertBefore(pageInput,status_label);
+     })
+
 
 //take user input & store the new book obj into array
 function add_book_to_lib(){
@@ -40,7 +60,6 @@ function add_book_to_lib(){
         const value4 = input4.value;
         //use the values to create the obj
         let newBook = new Book(value1,value2,value3,value4);
-        console.log(newBook);
         //Add the object to the array
         booklist.push(newBook);
 
@@ -105,28 +124,19 @@ function displayBooks() {
             // Traverse up the DOM tree to find the parent book div
             let bookCard = e.target.parentNode; //find parent of cancel button
             //find the index of the canceled book in the array by comparing the child element of div with the properties of bk obj
-            let idElement = bookCard.querySelector('.id').textContent;
-            // Iterate over the booklist array to find the matching book
-            for (let i = 0; i < booklist.length; i++) {
-                // Check if the id of the current book matches the id from the clicked element
-                if (booklist[i].id === idElement) {
-                    // Remove the matching book from the array
-                    booklist.splice(i, 1);
-                    break; // Exit the loop since we found and removed the book
-                }
-            }
+            let idElement = bookCard.querySelector('.id');
             
+           
+            let index = booklist.findIndex(book => {
+                return book.id ===idElement.textContent });//note that i do not need to parseInt since it's ald an int!!!
+            // array.splice(indexToRemove, qty of item to remove)
+            booklist.splice(index, 1);
             bookCard.textContent='';
             displayBooks();
         }
     }
 )
 
-
-
-function changeReadStatus(){
-
-}
-
+     
 pop_up_form();
 add_book_to_lib();
