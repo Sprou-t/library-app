@@ -9,36 +9,42 @@
 <title>Books Library</title>
 </head>
 <body>
-    <div class="header">
-        <button type="button" class="open-button">NEW BOOK</button>
-    </div>
-    
-        <!-- The pop-up form:use absolute positioning -->
-    <div class="form-popup" id="myForm">
-    <form action="" class="form-container">
-        <h1>New Book</h1>
+   <div class="header">
+       <button type="button" class="open-button">NEW BOOK</button>
+   </div>
+  
+       <!-- The pop-up form:use absolute positioning -->
+   <dialog class="form-popup" id="myForm">
+   <form action="" class="form-container">
+       <h1>New Book</h1>
 
-        <label for="id"><b>ID</b></label>
-        <input id='id' type="number" placeholder="Enter ID" name="id" required>
 
-        <label for="title"><b>Title</b></label>
-        <input id='title' type="text" placeholder="Enter Title" name="title" required>
+       <label for="id"><b>ID</b></label>
+       <input id='id' type="number" placeholder="Enter ID" name="id" required>
 
-        <label for="author"><b>Author</b></label>
-        <input id='author' type="text" placeholder="Enter Author name" name="author" required>
 
-        <label id='status_label' for="status"><b>Already read?</b></label>
-        <input id='status' type="checkbox" name="status">
+       <label for="title"><b>Title</b></label>
+       <input id='title' type="text" placeholder="Enter Title" name="title" required>
 
-        <!-- add a toggle button to change the read status of a book -->
-        <button type="submit" class="submit btn">Enter</button>
-        <button type="button" class="cancel btn">Close</button>
-    </form>
-    </div>
-    
 
-    <div class="display_panel">
-               <!-- added books will be displayed here -->
-    </div>
+       <label for="author"><b>Author</b></label>
+       <input id='author' type="text" placeholder="Enter Author name" name="author" required>
+
+
+       <label id='status_label' for="status"><b>Already read?</b></label>
+       <input id='status' type="checkbox" name="status">
+
+
+       <!-- add a toggle button to change the read status of a book -->
+       <button type="submit" class="submit btn">Enter</button>
+       <button type="button" class="close btn">Close</button>
+   </form>
+</dialog>
+  
+
+
+   <div class="display_panel">
+              <!-- added books will be displayed here -->
+   </div>
 </body>
 </html>

@@ -1,18 +1,21 @@
 /* The popup form - hidden by default */
-.form-container {
-    display: none;
-    position:absolute;
-    bottom: 400px;
-    left:200px;
-    border: 3px solid #f1f1f1;
-    z-index: 9;
-  }
+.form-popup {
+  position:absolute;
+  top:200px;
+  left:130px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  max-width:75chch;
+}
 
-  .display_panel{
-    display: flex;
-    gap: 20px;
-  }
 
-  #blur {
-    filter: blur(4px);
-  }
+.form-popup::backdrop{
+  background:rgb(0 0 0/.2)
+  /* learn about this */
+}
+
+
+.display_panel{
+  display: flex;
+  gap: 20px;
+}
