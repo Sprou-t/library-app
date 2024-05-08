@@ -49,24 +49,6 @@ closePopUpForm.addEventListener('click',()=>{
     
 })
 
-// //function changeReadStatus()
-// display_panel.addEventListener('click',(e) =>{
-//     let readBookstatus;
-//     if (e.target.classList.contains('readIndBookStatus'))
-//     {
-//         readBookstatus = document.querySelector('.readIndBookStatus')
-//     }
-
-//     if(readBookstatus.textContent == 'Read'){
-//         readBookstatus.textContent = 'Not read';
-//     }
-    
-//     else{
-//         readBookstatus.textContent = 'Read';
-//     }
-// })
-
-
 
 // function library_function()
 //take user input & use the info to create  store a new obj, store it in array
@@ -166,25 +148,25 @@ booklist.forEach(book => {
 }
 
 
-//function removeBookFromLibrary()
-// Use event delegation by adding an event listener to the display panel
-display_panel.addEventListener('click',(e)=>{
-   // Check if the clicked element is a cancel button
-   if (e.target.classList.contains('cancel')) {
-       // Traverse up the DOM tree to find the parent book div
-       let bookCard = e.target.parentNode; //find parent of cancel button which is the bookcard
-       //find the index of the canceled book in the array by comparing the child element of div with the properties of bk obj
-       let idOfCancelledBook = bookCard.querySelector('.id');
-      
-      
-       let index = booklist.findIndex(book => {
-           return book.id ===idOfCancelledBook.textContent });//note that i do not need to parseInt since it's ald an int!!!
-       // array.splice(indexToRemove, qty of item to remove)
-       booklist.splice(index, 1);
-       bookCard.textContent='';
-       displayBooks();//clear outdated list and update with the new look after deleting
-   }
-})
-
-
+function removeBookFromLibrary(){
+    // Use event delegation by adding an event listener to the display panel
+    display_panel.addEventListener('click',(e)=>{
+    // Check if the clicked element is a cancel button
+    if (e.target.classList.contains('cancel')) {
+        // Traverse up the DOM tree to find the parent book div
+        let bookCard = e.target.parentNode; //find parent of cancel button which is the bookcard
+        //find the index of the canceled book in the array by comparing the child element of div with the properties of bk obj
+        let idOfCancelledBook = bookCard.querySelector('.id');
+        
+        
+        let index = booklist.findIndex(book => {
+            return book.id ===idOfCancelledBook.textContent }); //note that i do not need to parseInt since it's ald an int!!!
+        // array.splice(indexToRemove, qty of item to remove)
+        booklist.splice(index, 1);
+        bookCard.textContent='';
+        displayBooks();//clear outdated list and update with the new look after deleting
+    }
+    })
+}
+removeBookFromLibrary();
      
