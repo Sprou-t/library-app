@@ -18,14 +18,23 @@ let author;
 let pagesRead;
 let pages;
 
-//obj constructor
-function Book(id,title,author,readstatus){ //obj created: Book(id = x, title = y, author = z, page = m). We can access the key to the value pair
-    this.id = id; //key = value pair
-    this.title = title;
-    this.author = author;
-    this.readstatus = readstatus
-}
+// obj constructor
+// function Book(id,title,author,readstatus){ //obj created: Book(id = x, title = y, author = z, page = m). We can access the key to the value pair
+//     this.id = id; //key = value pair
+//     this.title = title;
+//     this.author = author;
+//     this.readstatus = readstatus
+// }
 
+//class
+class Book{
+    constructor(id,title,author,readstatus){
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.readstatus = readstatus;
+    }
+}
 
 // function popUpForm()
 //create button-onclick event that pops up a form
